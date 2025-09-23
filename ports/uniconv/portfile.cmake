@@ -23,6 +23,15 @@ if(EXISTS "${CURRENT_PACKAGES_DIR}/include/UniConv/iconv/config.h")
     )
 endif()
 
+# Fix header structure - move iconv.h to the correct location
+if(EXISTS "${CURRENT_PACKAGES_DIR}/include/UniConv/iconv.h")
+    file(MAKE_DIRECTORY "${CURRENT_PACKAGES_DIR}/include/UniConv/iconv")
+    file(RENAME 
+        "${CURRENT_PACKAGES_DIR}/include/UniConv/iconv.h" 
+        "${CURRENT_PACKAGES_DIR}/include/UniConv/iconv/iconv.h"
+    )
+endif()
+
 vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/UniConv)
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
